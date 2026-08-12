@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday, Syed Daniyal Shah</title>
+  
+  <!-- Google Fonts for Luxury Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --gold-primary: #D4AF37;
+      --gold-light: #FFF0A5;
+      --gold-dark: #AA771C;
+      --bg-dark: #0A0A0C;
+      --card-bg: rgba(20, 20, 25, 0.75);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: #E2E8F0;
+      font-family: 'Montserrat', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Ambient Background Glow */
+    .bg-glow {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(212,175,55,0.12) 0%, rgba(0,0,0,0) 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* Fireworks Canvas */
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* Main Container Card */
+    .container {
+      position: relative;
+      z-index: 2;
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: 16px;
+      padding: 3rem 2.5rem;
+      max-width: 650px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8),
+                  0 0 30px rgba(212, 175, 55, 0.15);
+      animation: cardAppear 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    /* Golden Border Frame Accent */
+    .container::before {
+      content: '';
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      border-radius: 10px;
+      pointer-events: none;
+    }
+
+    .badge {
+      font-family: 'Cinzel', serif;
+      font-size: 0.85rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold-primary);
+      margin-bottom: 1rem;
+      display: inline-block;
+      opacity: 0.9;
+    }
+
+    .title {
+      font-family: 'Cinzel', serif;
+      font-size: 2.8rem;
+      font-weight: 700;
+      line-height: 1.2;
+      background: linear-gradient(135deg, #FFFFFF 0%, var(--gold-light) 50%, var(--gold-primary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+    }
+
+    .subtitle {
+      font-family: 'Cinzel', serif;
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: #E2E8F0;
+      margin-bottom: 2rem;
+      letter-spacing: 2px;
+    }
+
+    .divider {
+      height: 1px;
+      width: 120px;
+      background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
+      margin: 0 auto 2rem;
+    }
+
+    .message {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: #CBD5E1;
+      font-weight: 300;
+      margin-bottom: 2.5rem;
+    }
+
+    .btn-celebrate {
+      background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
+      color: #0A0A0C;
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+      padding: 1rem 2.5rem;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);
+    }
+
+    .btn-celebrate:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 25px rgba(212, 175, 55, 0.6);
+      background: linear-gradient(135deg, var(--gold-light), var(--gold-primary));
+    }
+
+    /* Entry Animations */
+    @keyframes cardAppear {
+      0% {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 480px) {
+      .title { font-size: 2rem; }
+      .subtitle { font-size: 1.2rem; }
+      .container { padding: 2rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-glow"></div>
+  <canvas id="fireworks"></canvas>
+
+  <div class="container">
+    <span class="badge">A Royal Celebration</span>
+    <h1 class="title">HAPPY BIRTHDAY</h1>
+    <h2 class="subtitle">SYED DANIYAL SHAH</h2>
+    
+    <div class="divider"></div>
+
+    <p class="message">
+      May your year ahead be blessed with prestige, extraordinary success, 
+      and timeless happiness. Wishing you a day as distinguished and magnificent 
+      as you are.
+    </p>
+
+    <button class="btn-celebrate" onclick="triggerCelebration()">Celebrate</button>
+  </div>
+
+  <script>
+    // Canvas Fireworks Simulation
+    const canvas = document.getElementById('fireworks');
+    const ctx = canvas.getContext('2d');
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    let particles = [];
+
+    class Particle {
+      constructor(x, y, color) {
+        this.x = x;
+        this.y = y;
+        this.color = color;
+        this.radius = Math.random() * 2 + 1;
+        this.velocity = {
+          x: (Math.random() - 0.5) * 6,
+          y: (Math.random() - 0.5) * 6
+        };
+        this.alpha = 1;
+        this.friction = 0.96;
+        this.gravity = 0.03;
+      }
+
+      draw() {
+        ctx.save();
+        ctx.globalAlpha = this.alpha;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = this.color;
+        ctx.fill();
+        ctx.restore();
+      }
+
+      update() {
+        this.velocity.x *= this.friction;
+        this.velocity.y *= this.friction;
+        this.velocity.y += this.gravity;
+        this.x += this.velocity.x;
+        this.y += this.velocity.y;
+        this.alpha -= 0.012;
+      }
+    }
+
+    function createFirework(x, y) {
+      const goldColors = ['#D4AF37', '#FFF0A5', '#AA771C', '#FFFFFF', '#E2E8F0'];
+      const particleCount = 60;
+      for (let i = 0; i < particleCount; i++) {
+        const color = goldColors[Math.floor(Math.random() * goldColors.length)];
+        particles.push(new Particle(x, y, color));
+      }
+    }
+
+    function animate() {
+      requestAnimationFrame(animate);
+      ctx.fillStyle = 'rgba(10, 10, 12, 0.2)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      particles.forEach((particle, index) => {
+        if (particle.alpha > 0) {
+          particle.update();
+          particle.draw();
+        } else {
+          particles.splice(index, 1);
+        }
+      });
+    }
+
+    function triggerCelebration() {
+      for (let i = 0; i < 5; i++) {
+        setTimeout(() => {
+          const x = Math.random() * canvas.width;
+          const y = Math.random() * (canvas.height * 0.6);
+          createFirework(x, y);
+        }, i * 250);
+      }
+    }
+
+    // Auto-firework on load
+    window.onload = () => {
+      animate();
+      setTimeout(triggerCelebration, 500);
+    };
+  </script>
+</body>
+</html>
